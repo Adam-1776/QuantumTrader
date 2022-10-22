@@ -31,7 +31,7 @@ public class QuantumTraderController {
 
     @ResponseBody
     @GetMapping("/user/logs")
-    public ResponseEntity<String> returnLogs(@PathVariable int id) {
+    public ResponseEntity<String> returnLogs(@RequestParam int id) {
         if (id == 3) {
             System.out.println("Returning the following:" + stock.toString());
             return new ResponseEntity<>(stock.toString(), HttpStatus.OK);
