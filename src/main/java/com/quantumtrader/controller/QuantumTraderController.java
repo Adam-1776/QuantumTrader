@@ -17,13 +17,8 @@ public class QuantumTraderController {
 
     private Stock stock = new Stock("BBY", 25, 44);
 
-    @GetMapping(value = "/test/{id}", produces = "application/json")
-    public int returntest(@PathVariable int id) {
-        return id*2;
-    }
-
-    @GetMapping(value = "/user/{id}", produces = "application/json")
-    public ResponseEntity<Stock> returnStock(@PathVariable int id, @RequestParam String stockname) {
+    @GetMapping(value = "/user", produces = "application/json")
+    public ResponseEntity<Stock> returnStock(@RequestParam int id, @RequestParam String stockname) {
         stockname = stockname.toLowerCase();
         if (id == 3 && stockname.equals("bby")) {
             System.out.println("Returning the following:" + stock.toString());
@@ -35,7 +30,7 @@ public class QuantumTraderController {
     }
 
     @ResponseBody
-    @GetMapping("/user/{id}/logs")
+    @GetMapping("/user/logs")
     public ResponseEntity<String> returnLogs(@PathVariable int id) {
         if (id == 3) {
             System.out.println("Returning the following:" + stock.toString());
