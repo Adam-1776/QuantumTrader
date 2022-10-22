@@ -9,6 +9,7 @@ public class Stock {
     private int currentPrice;
     private Instant timeLastUpdated;
     private Instant purchaseTime;
+    private int currentValue;
 
     public Stock(String stockName, int numShares, int purchasePrice) {
         this.stockName = stockName;
@@ -17,6 +18,7 @@ public class Stock {
         this.currentPrice = purchasePrice;
         this.purchaseTime = Instant.now();
         this.timeLastUpdated = this.purchaseTime;
+        this.currentValue = purchasePrice * numShares;
     }
 
     @Override
@@ -28,7 +30,7 @@ public class Stock {
             "currentPrice = " + this.currentPrice + "\n" +
             "timeLastUpdated = " + this.timeLastUpdated + "\n" +
             "investmentCost = " + investmentCost() + "\n" +
-            "currentValue = " + currentValue() + "\n\n";
+            "currentValue = " + getCurrentValue() + "\n\n";
             return ret;
     }
 
@@ -62,8 +64,13 @@ public class Stock {
         return this.currentPrice;
     }
 
-    public int currentValue() {
-        return updateCurrentPrice() * numShares;
+    public int getCurrentValue() {
+        this.currentValue = updateCurrentPrice() * numShares;
+        return this.currentValue;
+    }
+
+    public int getValue() {
+        return this.currentValue;
     }
 
     public int investmentCost() {
