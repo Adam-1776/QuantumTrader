@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.quantumtrader.controller", "com.quantumtrader.entity", "com.quantumtrader.service"})
+@ComponentScan(basePackages = {"com.quantumtrader.controller", "com.quantumtrader.service"})
 public class AppApplication {
 
 	public static void main(String[] args) {

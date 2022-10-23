@@ -12,13 +12,13 @@ public class Portfolio {
 
     private Map<String,Stock> portfolio;
     private SortedSet<String> holdings;
-    private int id;
+    private String id;
     private Instant timeLastUpdated;
     private int moneyInvested;
     private int moneyNotInvested;
     private int portfolioValue;
 
-    public Portfolio(int id, int initialInvestment) {
+    public Portfolio(String id, int initialInvestment) {
         this.id = id;
         this.portfolio = new HashMap<String,Stock>();
         this.holdings = new TreeSet<String>();
@@ -44,7 +44,14 @@ public class Portfolio {
         return 1;
     }
 
-    public int getId() {
+    public Stock getStock(String stockName) {
+        if (!holdings.contains(stockName)) {
+            return null; //not holding this stock
+        }
+        return this.portfolio.get(stockName);
+    }
+
+    public String getId() {
         return this.id;
     }
 
@@ -80,6 +87,16 @@ public class Portfolio {
 
     public List<Stock> getPortfolio() {
         return new ArrayList<Stock>(this.portfolio.values());
+    }
+
+    public String getLogs() {
+        String temp = "moneyInvested = " + this.moneyInvested +
+            "\nmoneyNotInvested = " + this.moneyNotInvested +
+            "\nportfolioValue = " + this.portfolioValue;
+        for(String holding: this.holdings) {
+            temp += this.portfolio.get(holding).toString();
+        }
+        return temp;
     }
     
 }
