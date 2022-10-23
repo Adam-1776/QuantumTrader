@@ -37,6 +37,16 @@ public class QuantumTraderController {
         }
     }
 
+    @PostMapping("/user/buystock")
+    public ResponseEntity<String> addStock(@RequestParam String id, @RequestParam String stockname, @RequestParam int numshares) {
+        if (portfolioService.addNewStock(id, stockname, 1, numshares) == 1) {
+            return new ResponseEntity<>("Purchased " + numshares + " shares of " + stockname, HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<>("Error", HttpStatus.BAD_REQUEST);
+        }
+    }
+
 
     @GetMapping(value = "/user/checkstock", produces = "application/json")
     public ResponseEntity<Stock> returnStock(@RequestParam String id, @RequestParam String stockname) {
