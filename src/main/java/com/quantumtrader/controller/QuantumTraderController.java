@@ -39,6 +39,7 @@ public class QuantumTraderController {
 
     @PostMapping("/user/buystock")
     public ResponseEntity<String> addStock(@RequestParam String id, @RequestParam String stockname, @RequestParam int numshares) {
+        stockname = stockname.toUpperCase();
         if (portfolioService.addNewStock(id, stockname, 1, numshares) == 1) {
             return new ResponseEntity<>("Purchased " + numshares + " shares of " + stockname, HttpStatus.OK);
         }
@@ -50,7 +51,7 @@ public class QuantumTraderController {
 
     @GetMapping(value = "/user/checkstock", produces = "application/json")
     public ResponseEntity<Stock> returnStock(@RequestParam String id, @RequestParam String stockname) {
-        stockname = stockname.toLowerCase();
+        stockname = stockname.toUpperCase();
         Stock ret = this.portfolioService.returnStock(id, stockname);
         if (ret != null) {
             return new ResponseEntity<>(ret, HttpStatus.OK);
