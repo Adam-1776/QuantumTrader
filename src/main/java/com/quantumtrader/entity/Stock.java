@@ -1,15 +1,38 @@
 package com.quantumtrader.entity;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 import java.time.Instant;
 
+@Entity(name = "Stock")
 public class Stock {
+
+    @Id
+    @Column
     private String stockName;
+
+    @Column
     private int numShares;
+
+    @Column
     private int purchasePrice;
+
+    @Column
     private int currentPrice;
+
+    @Column
     private Instant timeLastUpdated;
+
+    @Column
     private Instant purchaseTime;
+
+    @Column
     private int currentValue;
+
+    public Stock() {
+        
+    }
 
     public Stock(String stockName, int numShares, int purchasePrice) {
         this.stockName = stockName;
