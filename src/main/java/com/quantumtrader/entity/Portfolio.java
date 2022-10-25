@@ -92,7 +92,7 @@ public class Portfolio {
     public String getLogs() {
         String temp = "moneyInvested = " + this.moneyInvested +
             "\nmoneyNotInvested = " + this.moneyNotInvested +
-            "\nportfolioValue = " + this.portfolioValue;
+            "\nportfolioValue = " + this.portfolioValue + "\n\n";
         for(String holding: this.holdings) {
             temp += this.portfolio.get(holding).toString();
         }

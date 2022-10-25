@@ -1,15 +1,38 @@
 package com.quantumtrader.entity;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 import java.time.Instant;
 
+@Entity(name = "Stock")
 public class Stock {
+
+    @Id //This column is the primary key for the table
+    @Column(nullable = false, updatable = false) //The value in this column for a given row must not be false, it must not be updated once created.
     private String stockName;
+
+    @Column
     private int numShares;
+
+    @Column
     private int purchasePrice;
+
+    @Column
     private int currentPrice;
+
+    @Column
     private Instant timeLastUpdated;
+
+    @Column
     private Instant purchaseTime;
+
+    @Column
     private int currentValue;
+
+    public Stock() {
+
+    }
 
     public Stock(String stockName, int numShares, int purchasePrice) {
         this.stockName = stockName;
