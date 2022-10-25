@@ -44,6 +44,21 @@ public class Portfolio {
         return 1;
     }
 
+    public int addNewStock(Stock stock) {
+        if (holdings.contains(stock.getStockName())) {
+            return 0; //Already holding this stock
+        }
+        if ((stock.getPurchasePrice() * stock.getNumShares()) > this.moneyNotInvested) {
+            return -1; //Not enough cash to make this purchase
+        }
+        this.holdings.add(stock.getStockName());
+        this.portfolio.put(stock.getStockName(), stock);
+        this.timeLastUpdated = Instant.now();
+        this.moneyNotInvested -= (stock.getPurchasePrice() * stock.getNumShares());
+        this.moneyInvested += (stock.getPurchasePrice() * stock.getNumShares());
+        return 1;
+    }
+
     public Stock getStock(String stockName) {
         if (!holdings.contains(stockName)) {
             return null; //not holding this stock

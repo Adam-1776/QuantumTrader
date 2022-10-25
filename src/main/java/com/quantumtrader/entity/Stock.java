@@ -61,7 +61,7 @@ public class Stock {
         return this.stockName;
     }
 
-    public int getNumshares() {
+    public int getNumShares() {
         return this.numShares;
     }
 

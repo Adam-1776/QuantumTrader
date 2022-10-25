@@ -2,6 +2,7 @@ package com.quantumtrader.service;
 
 import com.quantumtrader.entity.Portfolio;
 import com.quantumtrader.entity.Stock;
+import com.quantumtrader.repository.StockRepository;
 
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class QuantService {
+
+    private StockRepository stockRepository;
 
     private Map<String,Portfolio> portfolios = new HashMap<>();
 
@@ -26,11 +29,16 @@ public class QuantService {
         return true;
     }
 
-    public int addNewStock(String id, String stockName, int purchasePrice, int numShares) {
+    public int addNewStock(String id, String stockName, int numShares, int purchasePrice) {
         if (!portfolios.containsKey(id)) {
             return -2; //No portfolio with this id exists
         }
-        return this.portfolios.get(id).addNewStock(stockName, purchasePrice, numShares);
+        Stock newStock = new Stock(stockName, numShares, purchasePrice);
+        int ret = this.portfolios.get(id).addNewStock(newStock);
+        if (ret == 1) {
+            stockRepository.save(newStock);
+        }
+        return ret;
     }
 
     public Stock returnStock(String id, String stockName) {
