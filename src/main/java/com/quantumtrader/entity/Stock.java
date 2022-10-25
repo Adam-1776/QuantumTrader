@@ -8,8 +8,8 @@ import java.time.Instant;
 @Entity(name = "Stock")
 public class Stock {
 
-    @Id
-    @Column
+    @Id //This column is the primary key for the table
+    @Column(nullable = false, updatable = false) //The value in this column for a given row must not be false, it must not be updated once created.
     private String stockName;
 
     @Column
@@ -31,7 +31,7 @@ public class Stock {
     private int currentValue;
 
     public Stock() {
-        
+
     }
 
     public Stock(String stockName, int numShares, int purchasePrice) {
